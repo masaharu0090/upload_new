@@ -1,4 +1,6 @@
 <?php 
+
+require_once "./dbc.php";
 // ファイル関連の取得
 $file = $_FILES['img'];
 $filename = basename($file['name']);
@@ -8,6 +10,7 @@ $filesize = $file['size'];
 $upload_dir = '/xampp/htdocs/upload/images/';
 $save_filename = date('YmdHis') . $filename;
 $err_msgs = array();
+$save_path = $upload_dir. $save_filename;
 
 // キャプションを取得
 $caption = filter_input(INPUT_POST, 'caption',FILTER_SANITIZE_SPECIAL_CHARS);
@@ -39,8 +42,16 @@ if(!in_array(strtolower($file_ext), $allow_ext)) {
 if (count($err_msgs) === 0 ) {
     // ファイルはあるかどうか?
     if (is_uploaded_file($tmp_path)) {
-        if (move_uploaded_file($tmp_path, $upload_dir. $save_filename)) {
+        if (move_uploaded_file($tmp_path, $save_path)) {
             echo $filename . 'を'. $upload_dir . 'にアップしました。 ';
+            // DBに保存（ファイル名、ファイルパス、キャプション）
+            $result = fileSave($filename, $save_path, $caption);
+
+            if ($result) {
+                echo 'データベースに保存しました！';
+            } else {
+                echo 'データベースへの保存が失敗しました！';
+            }
         } else {
             echo 'ファイルが保存できませんでした。';
         }
