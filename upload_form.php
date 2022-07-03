@@ -1,4 +1,7 @@
 <?php
+require_once "./dbc.php";
+var_dump(getAllFile());
+
 ?>
 <!-- ①フォームの説明 -->
 <!-- ②$_FILEの確認 -->

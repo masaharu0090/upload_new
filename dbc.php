@@ -49,3 +49,17 @@ try{
 
 
 }
+
+/**
+ * ファイルデータを保存
+
+ * @return bool $fileData
+ */
+function getAllFile()
+{
+    $sql = "SELECT * FROM file_table";
+
+    $fileData = dbc()->query($sql);
+
+    return $fileData;
+}
