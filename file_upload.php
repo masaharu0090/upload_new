@@ -49,8 +49,7 @@ if (count($err_msgs) === 0 ) {
 
             if ($result) {
                 echo 'データベースに保存しました！';
-            } else {
-                echo 'データベースへの保存が失敗しました！';
+          
             }
         } else {
             echo 'ファイルが保存できませんでした。';

@@ -31,9 +31,10 @@ function dbc()
  */
 function fileSave($filename, $save_path, $caption)
 {
-    $result = false;
+    $result = False;
 
     $sql = "INSERT INTO file_table (file_name, file_path, description) VALUE (?, ?, ?)";
+
 try{
     $stmt = dbc()->prepare($sql);
     $stmt->bindValue(1, $filename);
@@ -41,7 +42,7 @@ try{
     $stmt->bindValue(3, $caption);
     $retult = $stmt->execute();
     return $result;
- }catch(\Exception $e){
+ } catch(\Exception $e) {
     echo $e->getMessage();
     return $result; 
 }
