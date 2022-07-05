@@ -1,6 +1,6 @@
 <?php
 require_once "./dbc.php";
-var_dump(getAllFile());
+$files = getAllFile();
 
 ?>
 <!-- ①フォームの説明 -->
@@ -57,5 +57,11 @@ var_dump(getAllFile());
         <input type="submit" value="送信" class="btn" />
       </div>
     </form>
+    <div>
+<?php foreach($_FILES as $file): ?>
+  <img src="<?php echo h("{$file['file_path']}");?>" alt="">
+  <p><?php echo "{$file['description']}";?></p>
+  <?php endforeach; ?>
+    </div>
   </body>
 </html>
